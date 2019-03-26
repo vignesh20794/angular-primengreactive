@@ -1,0 +1,21 @@
+<link rel="stylesheet" type="text/css" href="/node_modules/primeicons/primeicons.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/themes/nova-light/theme.css" />
+<link rel="stylesheet" type="text/css" href="/node_modules/primeng/resources/primeng.min.css" />
+
+<p-sidebar [(visible)]="display" [showCloseIcon]="false">
+  <section id='card'>
+   <ul>
+     <li>
+       <a routerLink="/dashboard"><h4> Dashboard</h4></a>
+     </li>
+     <li>
+       <a routerLink="/list"> <h4>Persons</h4></a>
+     </li>
+   </ul>
+  </section>
+</p-sidebar>
+
+<div id="layout-content">
+<button type="text" (click)="display = true" pButton icon="pi pi-list" label="Menu"></button>
+<router-outlet></router-outlet>
+</div>

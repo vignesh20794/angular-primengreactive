@@ -1,0 +1,62 @@
+<div id=form>
+  <p-toast position="top-right"></p-toast>
+<p-card header="{{title}} Person">
+	<form  [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+		<div class="ui-g ui-fluid">
+			<div class="form-group ui-md-6">
+				<label>First Name</label>
+    <input pInputText  type="text" formControlName="firstname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+        <div *ngIf="f.firstname.errors.required">First Name is required</div>
+    </div>
+  </div>
+  <div class="form-group ui-md-6">
+    <label>Last Name</label>
+      <input pInputText  type="text" formControlName="lastname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+      <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+          <div *ngIf="f.lastname.errors.required">Last Name is required</div>
+      </div>
+  </div>
+  </div>
+  <div class="ui-g ui-fluid">
+  <div class="form-group ui-md-6">
+      <label>Date of Birth</label>
+      <!-- <input pInputText  type="date" formControlName="dob" class="form-control"/> -->
+       <p-calendar formControlName="dob" (onSelect)="onSelectMethod($event)"
+            [dataType]="date" [showIcon]="true" dateFormat="dd-mm-yy"></p-calendar>
+      <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+          <div *ngIf="f.dob.errors.required">DOB is required</div>
+           <div *ngIf="f.dob.errors.dobRange">DOB cannot be grater than todays date</div>
+      </div>
+  </div>
+  <div class="form-group ui-md-6">
+    <label>Contact</label>
+      <input pInputText  type="text" formControlName="contact" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }" />
+      <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+          <div *ngIf="f.contact.errors.required">contact is required</div>
+          <div *ngIf="f.contact.errors.maxlength">contact must be at least 10 characters</div>
+          <div *ngIf="f.contact.errors.pattern && !f.contact.errors.maxlength">Provide valid number</div>
+      </div>
+  </div>
+  </div>
+<div class="ui-g ui-fluid">
+  <div class="form-group ui-md-6">
+      <label>Gender</label>
+      <div>
+      <p-radioButton class="ui-md-6" name="groupname"  formControlName="gender" value="male" [(ngModel)]="selectedValue" label="Male"></p-radioButton>
+<p-radioButton class="ui-md-6" name="groupname" formControlName="gender" value="female" [(ngModel)]="selectedValue" label="Female"></p-radioButton>
+      </div>
+      <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+          <div *ngIf="f.gender.errors.required">Gender is required</div>
+      </div>
+  </div>
+</div>
+    <p-footer>
+<button *ngIf="title == 'Create'" class="ui-button-success" pButton type="submit" label="Save"  style="margin-right: .25em" icon="pi pi-check"></button>
+<button *ngIf="title == 'Edit'" class="ui-button-success" pButton type="submit" label="Update"  style="margin-right: .25em" icon="pi pi-check"></button>
+<button pButton type="button" class="ui-button-danger" label="Cancel" icon="pi pi-times" (click)="clearForm()"></button>
+</p-footer>       
+</form>
+</p-card>
+
+</div>

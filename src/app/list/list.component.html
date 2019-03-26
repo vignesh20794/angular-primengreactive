@@ -1,0 +1,36 @@
+<div class="ui-g">
+	<div class="ui-md-{{colwidth}}">
+		<button pButton type="button" label="Add" (click)="addClick(showForm)" style="margin-bottom:1%;" icon="pi pi-plus"></button>
+<p-table [value]="Persons" ui-table-responsive (state)="childListen($event)">
+    <ng-template pTemplate="header">
+        <tr>
+          <th>S.NO</th>
+            <th *ngFor="let col of cols">
+                {{col.header}}
+            </th>
+            <th>Actions</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-i="rowIndex">
+        <tr style="text-align: center;">
+            <td style="width:2%">{{i+1}}</td>
+            <td *ngFor="let col of cols;let i=index">
+             <span *ngIf="i != 2">{{rowData[col.field]}}</span>
+             <span *ngIf="i == 2">{{rowData[col.field]|date}}</span>
+            </td>
+            <td>
+              <button pButton type="button" class="ui-button-success" icon="pi pi-pencil" (click)="editPerson(i)" style="margin-right: .5em;"></button> 
+              <button pButton type="button" class="ui-button-danger" icon="pi pi-trash" (click)="deletePerson(i)" style="margin-right: .5em;"></button> 
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+        There are {{Persons?.length}} Persons
+    </ng-template>
+</p-table>
+</div>
+<div *ngIf="showForm" class="ui-md-{{colwidth}}" id="secondary">
+<!-- <router-outlet></router-outlet> -->
+<app-list-create [person]="person"></app-list-create>
+</div>
+</div>
